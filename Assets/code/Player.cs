@@ -37,4 +37,9 @@ public class Player : MonoBehaviour {
 		else if(e_playNum == EPlayerNum.ePlayer2)
 			m_playerInput = CApoilInput.InputPlayer2;
 	}
+
+	void OnTriggerEnter2D(Collider2D other) 
+	{
+		Debug.LogError(other.tag);
+	}
 }
