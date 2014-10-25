@@ -30,7 +30,7 @@ public class Ennemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-	
+		GameObject.Destroy(this.gameObject, 5.0f);
 	}
 	
 	// Update is called once per frame
