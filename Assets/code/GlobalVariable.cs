@@ -3,6 +3,9 @@ using System.Collections;
 
 public class GlobalVariable : MonoBehaviour {
 
+	public static GameObject PF_CAMERA;
+	public GameObject pf_Camera;
+
 	public static GameObject PF_PLAYER;
 	public GameObject pf_PLayer;
 
@@ -33,10 +36,23 @@ public class GlobalVariable : MonoBehaviour {
 	public static GameObject PF_RAYON;
 	public GameObject pf_Rayon;
 
+	public static GameObject PF_LAUNCHER_COEUR;
+	public GameObject pf_launcher_Coeur;
+
+	public static GameObject PF_LAUNCHER_FLEUR;
+	public GameObject pf_launcher_Fleur;
+
+	public static GameObject PF_LAUNCHER_NOUNOURS;
+	public GameObject pf_launcher_Nounours;
+
+	public static GameObject PF_LAUNCHER_RAYON;
+	public GameObject pf_launcher_Rayon;
+
 
 	// Use this for initialization
 	void Awake () 
 	{
+		GlobalVariable.PF_CAMERA = pf_Camera;
 		GlobalVariable.PF_PLAYER = pf_PLayer;
 		GlobalVariable.PF_COEUR = pf_Coeur;	
 		GlobalVariable.PF_FLEUR = pf_Fleur;
@@ -47,6 +63,10 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.PF_ARCENCIEL = pf_ArcEnCiel;		
 		GlobalVariable.PF_LASER = pf_Laser;
 		GlobalVariable.PF_RAYON = pf_Rayon;
+		GlobalVariable.PF_LAUNCHER_COEUR = pf_launcher_Coeur;		
+		GlobalVariable.PF_LAUNCHER_FLEUR = pf_launcher_Fleur;	
+		GlobalVariable.PF_LAUNCHER_NOUNOURS = pf_launcher_Nounours;
+		GlobalVariable.PF_LAUNCHER_RAYON = pf_launcher_Rayon;
 	}
 	
 	// Update is called once per frame

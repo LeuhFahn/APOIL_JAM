@@ -4,11 +4,14 @@ using System.Collections;
 public class Game : MonoBehaviour {
 
 	int n_NbPlayer = 2;
-
+	GameObject go_camera;
+	public static GameObject go_trashContainer;
 	// Use this for initialization
 	void Start () 
 	{
 		CApoilInput.Init();
+
+		go_camera = Object.Instantiate(GlobalVariable.PF_CAMERA) as GameObject;
 
 		for(int i = 0 ; i < n_NbPlayer ; ++i)
 		{
@@ -18,6 +21,11 @@ public class Game : MonoBehaviour {
 			else
 				go_player.GetComponent<Player>().e_playNum = Player.EPlayerNum.ePlayer2;
 		}
+
+		Game.go_trashContainer = GameObject.Find("_trashContainer");
+
+		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
+		PaternManager.Instance.GenerateLauncherMap(PaternManager.ETypePatern.ePaternSchredder);
 	}
 	
 	// Update is called once per frame
@@ -29,5 +37,11 @@ public class Game : MonoBehaviour {
 		{
 			Application.Quit();
 		}
+	}
+
+	void InitCamera(GameObject _go_camera)
+	{
+		_go_camera.transform.position = new Vector3(Screen.width / 2.0f, Screen.height / 2.0f, -10.0f);
+		_go_camera.GetComponent<Camera>().orthographicSize = Screen.height / 2.0f;
 	}
 }

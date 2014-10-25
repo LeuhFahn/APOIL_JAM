@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
 	void Update () 
 	{
 		setPlayerInput();
-		float f_Velocity = 0.5f;
+		float f_Velocity = 10.0f;
 		Vector3 v3_move = Vector3.zero;
 
 		v3_move += f_Velocity * new Vector3(m_playerInput.DirectionHorizontal, m_playerInput.DirectionVertical, 0);

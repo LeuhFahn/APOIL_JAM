@@ -7,6 +7,7 @@ public class LaunchEnnemy : MonoBehaviour {
 
 	public Ennemy.ETypeLaunchElement m_eTypeEnnemyToLaunch;
 	public float f_timerLaunch = 2.0f;
+	public float f_Velocity = 10.0f;
 	private float f_timer;
 	private GameObject go_ennemy;
 
@@ -18,7 +19,7 @@ public class LaunchEnnemy : MonoBehaviour {
 		public float f_Angle;
 	}
 	
-	public float[] variablesDeTrajectoire = new float[4];
+	public float[] variablesDeTrajectoire;
 	private List<TrajectoireFrame> list_trajectoire;
 	private int n_SizeTrajectoire;
 
@@ -27,10 +28,6 @@ public class LaunchEnnemy : MonoBehaviour {
 	void Start () 
 	{
 		f_timer = 0.0f;
-		if(( variablesDeTrajectoire.Length % 4) != 0)
-		{
-			Debug.LogError("PUTAIN JEAN PHE!!!! multiple de 4 la taille du tableau!!!");
-		}
 		n_SizeTrajectoire = variablesDeTrajectoire.Length/4;
 		list_trajectoire = new List<TrajectoireFrame>(n_SizeTrajectoire);
 
@@ -114,7 +111,8 @@ public class LaunchEnnemy : MonoBehaviour {
 		{
 			go_ennemy = Object.Instantiate(pf_ennemy) as GameObject;
 			go_ennemy.transform.position = this.transform.position;
-			go_ennemy.rigidbody2D.velocity = 10.0f * this.rigidbody2D.transform.up;
+			go_ennemy.rigidbody2D.velocity = f_Velocity * this.rigidbody2D.transform.up;
+			go_ennemy.transform.parent = Game.go_trashContainer.transform;
 		}
 	}
 
@@ -130,6 +128,7 @@ public class LaunchEnnemy : MonoBehaviour {
 				fTime += Time.deltaTime;
 				yield return new WaitForEndOfFrame();
 			}
+			fTime = 0.0f;
 			SetLauncherAtFrame(i);
 		}
 
