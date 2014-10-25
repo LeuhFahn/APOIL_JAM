@@ -89,14 +89,14 @@ public class PaternManager : MonoBehaviour {
 
 	void GenerateLauncherMapPaternSchredder()
 	{
-		float fSizeCase = 30.0f;
+		float fSizeCase = 2* 30.0f;
 		bool b_diagonale_HautDroite_BasGauche = true;
 		int nNbLauncher = 52;//2*16+2*10;
-		int nNbLauncherHorizontal = 16;
-		int nNbLauncherVerticall = 10;
+		int nNbLauncherHorizontal = 8;
+		int nNbLauncherVerticall = 5;
 
 		float f_velocityShot = 50.0f;
-		float f_timerLaunch =  2*fSizeCase/f_velocityShot;
+		float f_timerLaunch =  2*2*fSizeCase/f_velocityShot;
 
 		// haut
 		for(int i = 0 ; i < nNbLauncherHorizontal ; ++i)
@@ -136,7 +136,7 @@ public class PaternManager : MonoBehaviour {
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire = new float[4];
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[0] = 0.0f;
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[1] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = fSizeCase/2.0f + i*2*fSizeCase;
+			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = 3.0f*fSizeCase/2.0f + i*2*fSizeCase;
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[3] = 0.0f;
 			go_launcher.GetComponent<LaunchEnnemy>().f_timerLaunch = f_timerLaunch;
 			go_launcher.GetComponent<LaunchEnnemy>().f_Velocity = f_velocityShot;
@@ -151,7 +151,7 @@ public class PaternManager : MonoBehaviour {
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire = new float[4];
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[0] = 0.0f;
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[1] = Screen.width;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = 3*fSizeCase/2.0f + i*2*fSizeCase;
+			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = fSizeCase/2.0f + i*2*fSizeCase;
 			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[3] = 180.0f;
 			go_launcher.GetComponent<LaunchEnnemy>().f_timerLaunch = f_timerLaunch;
 			go_launcher.GetComponent<LaunchEnnemy>().f_Velocity = f_velocityShot;
