@@ -23,9 +23,7 @@ public class LaunchEnnemy : MonoBehaviour {
 	public float[] variablesDeTrajectoire;
 	private List<TrajectoireFrame> list_trajectoire;
 	private int n_SizeTrajectoire;
-
-	//public 
-	// Use this for initialization
+	
 	void Start () 
 	{
 		f_timer = 0.0f;
@@ -44,12 +42,12 @@ public class LaunchEnnemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if(f_timer > f_timerLaunch)
+		if(f_timer >= f_timerLaunch)
 		{
 			launchAnEnnemy();
 			f_timer = 0.0f;
 		}
-		else
+		else if(m_eTypeEnnemyToLaunch != Ennemy.ETypeLaunchElement.eRayon)
 		{
 			f_timer += Time.deltaTime;
 		}
@@ -110,13 +108,28 @@ public class LaunchEnnemy : MonoBehaviour {
 				pf_ennemy = GlobalVariable.PF_RAYON;
 				break;
 			}
+			case Ennemy.ETypeLaunchElement.eNuage:
+			{
+				pf_ennemy = GlobalVariable.PF_NUAGE;
+				break;
+			}
 		}
 
 		if(pf_ennemy != null)
 		{
 			go_ennemy = Object.Instantiate(pf_ennemy) as GameObject;
 			go_ennemy.transform.position = this.transform.position;
-			go_ennemy.rigidbody2D.velocity = f_Velocity * this.rigidbody2D.transform.up;
+
+			if(m_eTypeEnnemyToLaunch == Ennemy.ETypeLaunchElement.eRayon)
+			{
+				go_ennemy.rigidbody2D.transform.right = this.rigidbody2D.transform.up;
+				go_ennemy.rigidbody2D.velocity = Vector2.zero;
+			}
+			else 
+			{
+				go_ennemy.rigidbody2D.transform.up = this.rigidbody2D.transform.up;
+				go_ennemy.rigidbody2D.velocity = f_Velocity * this.rigidbody2D.transform.up;
+			}
 			go_ennemy.transform.parent = Game.go_trashContainer.transform;
 		}
 	}
@@ -124,7 +137,6 @@ public class LaunchEnnemy : MonoBehaviour {
 	IEnumerator launchEvents()
 	{
 		float fTime = 0.0f;
-		int nNextFrame = 0;
 
 		for(int i = 0 ; i < n_SizeTrajectoire ; ++i)
 		{

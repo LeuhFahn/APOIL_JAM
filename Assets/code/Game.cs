@@ -20,6 +20,7 @@ public class Game : MonoBehaviour {
 		for(int i = 0 ; i < n_NbPlayer ; ++i)
 		{
 			GameObject go_player = null;// Object.Instantiate(GlobalVariable.PF_PLAYER) as GameObject;
+			float f_offset = 30.0f;
 			if(i == 0)
 			{
 				go_player = Object.Instantiate(GlobalVariable.PF_PLAYER_MAN) as GameObject;
@@ -31,6 +32,7 @@ public class Game : MonoBehaviour {
 				go_player = Object.Instantiate(GlobalVariable.PF_PLAYER_WOMAN) as GameObject;
 				//go_spriteContainer.transform.parent = go_player.transform;
 				go_player.GetComponent<Player>().e_playNum = Player.EPlayerNum.ePlayer2;
+				f_offset *= -1;
 			}
 
 			go_player.rigidbody2D.transform.position = new Vector2(Screen.width / 4.0f + (1-i)*Screen.width / 2.0f, Screen.height / 2.0f);
@@ -42,7 +44,7 @@ public class Game : MonoBehaviour {
 		Game.f_difficulte = 0.0f;
 
 		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
-		PaternManager.Instance.GenerateLauncherMap(PaternManager.ETypePatern.ePaternSchredder, 50.0f);
+		//PaternManager.Instance.GenerateLauncherMap(PaternManager.ETypePatern.ePaternSchredder, 50.0f);
 	}
 	
 	// Update is called once per frame

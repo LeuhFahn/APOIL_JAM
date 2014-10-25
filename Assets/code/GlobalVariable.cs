@@ -33,9 +33,6 @@ public class GlobalVariable : MonoBehaviour {
 	public static GameObject PF_ARCENCIEL;
 	public GameObject pf_ArcEnCiel;
 
-	public static GameObject PF_LASER;
-	public GameObject pf_Laser;
-
 	public static GameObject PF_RAYON;
 	public GameObject pf_Rayon;
 
@@ -57,6 +54,8 @@ public class GlobalVariable : MonoBehaviour {
 	public static float F_DISTANCE_AMITIE;
 	public float f_distanceAmitie = 500.0f;
 
+	public static float F_TIME_TRANSFORMATION_RAYON_ARC;
+	public float f_timeTransformationRayonArc = 2.0f;
 
 	// Use this for initialization
 	void Awake () 
@@ -71,7 +70,6 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.PF_NUAGE = pf_Nuage;		
 		GlobalVariable.PF_SOLEIL = pf_Soleil;		
 		GlobalVariable.PF_ARCENCIEL = pf_ArcEnCiel;		
-		GlobalVariable.PF_LASER = pf_Laser;
 		GlobalVariable.PF_RAYON = pf_Rayon;
 		GlobalVariable.PF_LAUNCHER_COEUR = pf_launcher_Coeur;		
 		GlobalVariable.PF_LAUNCHER_FLEUR = pf_launcher_Fleur;	
@@ -79,6 +77,7 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.PF_LAUNCHER_RAYON = pf_launcher_Rayon;
 		GlobalVariable.PF_LAUNCHER_NUAGE = pf_Nuage;
 		GlobalVariable.F_DISTANCE_AMITIE = f_distanceAmitie;
+		GlobalVariable.F_TIME_TRANSFORMATION_RAYON_ARC = f_timeTransformationRayonArc;
 	}
 	
 	// Update is called once per frame
