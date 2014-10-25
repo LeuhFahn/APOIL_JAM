@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class LaunchEnnemy : MonoBehaviour {
 
 	public Ennemy.ETypeLaunchElement m_eTypeEnnemyToLaunch;
-	public float f_timerLaunch = 2.0f;
+	public float f_timerLaunch = 0.0f;
 	public float f_Velocity = 10.0f;
 	private float f_timer;
 	public float f_lifeTime = 5.0f;
@@ -37,6 +37,8 @@ public class LaunchEnnemy : MonoBehaviour {
 		CoroutineManager.Instance.StartCoroutine(launchEvents());
 
 		Destroy(this.gameObject, f_lifeTime);
+
+		f_timer = f_timerLaunch;
 	}
 	
 	// Update is called once per frame

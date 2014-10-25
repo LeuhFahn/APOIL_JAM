@@ -6,8 +6,11 @@ public class GlobalVariable : MonoBehaviour {
 	public static GameObject PF_CAMERA;
 	public GameObject pf_Camera;
 
-	public static GameObject PF_PLAYER;
-	public GameObject pf_PLayer;
+	public static GameObject PF_PLAYER_MAN;
+	public GameObject pf_PLayerMan;
+
+	public static GameObject PF_PLAYER_WOMAN;
+	public GameObject pf_PLayerWoman;
 
 	public static GameObject PF_COEUR;
 	public GameObject pf_Coeur;
@@ -48,12 +51,19 @@ public class GlobalVariable : MonoBehaviour {
 	public static GameObject PF_LAUNCHER_RAYON;
 	public GameObject pf_launcher_Rayon;
 
+	public static GameObject PF_LAUNCHER_NUAGE;
+	public GameObject pf_launcher_Nuage;
+
+	public static float F_DISTANCE_AMITIE;
+	public float f_distanceAmitie = 500.0f;
+
 
 	// Use this for initialization
 	void Awake () 
 	{
 		GlobalVariable.PF_CAMERA = pf_Camera;
-		GlobalVariable.PF_PLAYER = pf_PLayer;
+		GlobalVariable.PF_PLAYER_MAN = pf_PLayerMan;
+		GlobalVariable.PF_PLAYER_WOMAN = pf_PLayerWoman;
 		GlobalVariable.PF_COEUR = pf_Coeur;	
 		GlobalVariable.PF_FLEUR = pf_Fleur;
 		GlobalVariable.PF_PETAL = pf_Petale;		
@@ -67,6 +77,8 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.PF_LAUNCHER_FLEUR = pf_launcher_Fleur;	
 		GlobalVariable.PF_LAUNCHER_NOUNOURS = pf_launcher_Nounours;
 		GlobalVariable.PF_LAUNCHER_RAYON = pf_launcher_Rayon;
+		GlobalVariable.PF_LAUNCHER_NUAGE = pf_Nuage;
+		GlobalVariable.F_DISTANCE_AMITIE = f_distanceAmitie;
 	}
 	
 	// Update is called once per frame

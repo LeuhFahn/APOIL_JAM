@@ -22,6 +22,7 @@ public class Ennemy : MonoBehaviour {
 		eFleur,
 		eNounours,
 		eRayon,
+		eNuage,
 	}
 
 	public bool b_KillPlayer = true;

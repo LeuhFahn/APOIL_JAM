@@ -65,107 +65,91 @@ public class PaternManager : MonoBehaviour {
 
 	}
 
-	public void GenerateLauncherMap(ETypePatern _eTypePatern)
+	public void GenerateLauncherMap(ETypePatern _eTypePatern, float _f_duration)
 	{
 		switch(_eTypePatern)
 		{
 			case ETypePatern.ePaternSchredder:
 			{
-				GenerateLauncherMapPaternSchredder();
+				GenerateLauncherMapPaternSchredder(_f_duration, true);
 				break;
 			}
 			case ETypePatern.ePaternLaVague:
 			{
-				GenerateLauncherMapLaVague();
+				GenerateLauncherMapLaVague(_f_duration);
 				break;
 			}
 			case ETypePatern.ePaternDazzEstUnCon:
 			{
-				GenerateLauncherMapDazzEstUnCon();
+				GenerateLauncherMapDazzEstUnCon(_f_duration);
 				break;
 			}
 		}
 	}
 
-	void GenerateLauncherMapPaternSchredder()
+	void GenerateLauncherMapPaternSchredder(float _f_duration, bool _b_diagonale_HautDroite_BasGauche)
 	{
 		float fSizeCase = 2* 30.0f;
-		bool b_diagonale_HautDroite_BasGauche = true;
-		int nNbLauncher = 52;//2*16+2*10;
+		bool b_diagonale_HautDroite_BasGauche = _b_diagonale_HautDroite_BasGauche;
 		int nNbLauncherHorizontal = 8;
 		int nNbLauncherVerticall = 5;
 
 		float f_velocityShot = 50.0f;
 		float f_timerLaunch =  2*2*fSizeCase/f_velocityShot;
 
+		float f_durationPatern = _f_duration;
+		float f_decallageDiagonale = b_diagonale_HautDroite_BasGauche ? 0 : 1;
+
 		// haut
 		for(int i = 0 ; i < nNbLauncherHorizontal ; ++i)
 		{
 			GameObject go_launcher = Object.Instantiate(GlobalVariable.PF_LAUNCHER_COEUR) as GameObject;
-			go_launcher.rigidbody2D.transform.position = new Vector2(Screen.width, Screen.height);
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire = new float[4];
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[0] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[1] = fSizeCase/2.0f + i*2*fSizeCase;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = Screen.height;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[3] = 270.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().f_timerLaunch = f_timerLaunch;
-			go_launcher.GetComponent<LaunchEnnemy>().f_Velocity = f_velocityShot;
-			go_launcher.GetComponent<LaunchEnnemy>().f_lifeTime = 50.0f;
+			setVariablesLauncher(go_launcher, 0.0f, fSizeCase/2.0f + i*2*fSizeCase + f_decallageDiagonale * fSizeCase , Screen.height, 270.0f, f_timerLaunch, f_velocityShot, f_durationPatern);
 		}
 
 		// bas
 		for(int i = 0 ; i < nNbLauncherHorizontal ; ++i)
 		{
 			GameObject go_launcher = Object.Instantiate(GlobalVariable.PF_LAUNCHER_COEUR) as GameObject;
-			go_launcher.rigidbody2D.transform.position = new Vector2(Screen.width, Screen.height);
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire = new float[4];
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[0] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[1] = 3*fSizeCase/2.0f + i*2*fSizeCase;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[3] = 90.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().f_timerLaunch = f_timerLaunch;
-			go_launcher.GetComponent<LaunchEnnemy>().f_Velocity = f_velocityShot;
-			go_launcher.GetComponent<LaunchEnnemy>().f_lifeTime = 50.0f;
+			setVariablesLauncher(go_launcher, 0.0f, 3*fSizeCase/2.0f + i*2*fSizeCase - f_decallageDiagonale * fSizeCase, 0.0f, 90.0f, f_timerLaunch, f_velocityShot, f_durationPatern);
 		}
 
 		// gauche
 		for(int i = 0 ; i < nNbLauncherVerticall ; ++i)
 		{
 			GameObject go_launcher = Object.Instantiate(GlobalVariable.PF_LAUNCHER_COEUR) as GameObject;
-			go_launcher.rigidbody2D.transform.position = new Vector2(Screen.width, Screen.height);
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire = new float[4];
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[0] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[1] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = 3.0f*fSizeCase/2.0f + i*2*fSizeCase;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[3] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().f_timerLaunch = f_timerLaunch;
-			go_launcher.GetComponent<LaunchEnnemy>().f_Velocity = f_velocityShot;
-			go_launcher.GetComponent<LaunchEnnemy>().f_lifeTime = 50.0f;
+			setVariablesLauncher(go_launcher, 0.0f,0.0f, 3.0f * fSizeCase/2.0f + i*2*fSizeCase - f_decallageDiagonale * fSizeCase , 0.0f, f_timerLaunch, f_velocityShot, f_durationPatern);
 		}
 
 		// droite
 		for(int i = 0 ; i < nNbLauncherVerticall ; ++i)
 		{
 			GameObject go_launcher = Object.Instantiate(GlobalVariable.PF_LAUNCHER_COEUR) as GameObject;
-			go_launcher.rigidbody2D.transform.position = new Vector2(Screen.width, Screen.height);
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire = new float[4];
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[0] = 0.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[1] = Screen.width;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = fSizeCase/2.0f + i*2*fSizeCase;
-			go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[3] = 180.0f;
-			go_launcher.GetComponent<LaunchEnnemy>().f_timerLaunch = f_timerLaunch;
-			go_launcher.GetComponent<LaunchEnnemy>().f_Velocity = f_velocityShot;
-			go_launcher.GetComponent<LaunchEnnemy>().f_lifeTime = 50.0f;
+			setVariablesLauncher(go_launcher, 0.0f, Screen.width, fSizeCase/2.0f + i*2*fSizeCase + f_decallageDiagonale * fSizeCase , 180.0f, f_timerLaunch, f_velocityShot, f_durationPatern);
 		}
 
 
 	}
 
-	void GenerateLauncherMapLaVague()
+	void setVariablesLauncher(GameObject _go_launcher, float _f_time, float _f_posX, float _f_posY, float _f_Anlge, float _f_timerShot, float _f_velocityShot, float _f_lifeTime)
+	{
+		_go_launcher.rigidbody2D.transform.position = new Vector2(_f_posX, _f_posY);
+		_go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire = new float[4];
+		_go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[0] = _f_time;
+		_go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[1] = _f_posX;
+		_go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[2] = _f_posY;
+		_go_launcher.GetComponent<LaunchEnnemy>().variablesDeTrajectoire[3] = _f_Anlge;
+		_go_launcher.GetComponent<LaunchEnnemy>().f_timerLaunch = _f_timerShot;
+		_go_launcher.GetComponent<LaunchEnnemy>().f_Velocity = _f_velocityShot;
+		_go_launcher.GetComponent<LaunchEnnemy>().f_lifeTime = _f_lifeTime;
+		_go_launcher.transform.parent = Game.go_trashContainer.transform;
+	}
+
+	void GenerateLauncherMapLaVague(float _f_duration)
 	{
 	}
 
-	void GenerateLauncherMapDazzEstUnCon()
+	void GenerateLauncherMapDazzEstUnCon(float _f_duration)
 	{
 	}
 }
