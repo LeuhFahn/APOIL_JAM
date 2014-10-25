@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: e1259a72c3d5b62458a401f37fbfcc32
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: perso01_0
+    21300002: perso01_2
+    21300004: perso01_4
+    21300006: perso01_6
+    21300008: perso01_8
+    21300010: perso01_9
+    21300012: perso01_10
+    21300014: perso01_12
+    21300016: perso01_13
+    21300018: perso01_14
+    21300020: perso01_16
+    21300022: perso01_17
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: perso01_0
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 432
+        width: 69
+        height: 71
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_2
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 432
+        width: 64
+        height: 86
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_4
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 434
+        width: 60
+        height: 45
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_6
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 434
+        width: 52
+        height: 43
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_8
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 433
+        width: 54
+        height: 41
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_9
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 291
+        width: 48
+        height: 38
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_10
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 292
+        width: 59
+        height: 52
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_12
+      rect:
+        serializedVersion: 2
+        x: 303
+        y: 291
+        width: 64
+        height: 61
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_13
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 94
+        width: 86
+        height: 96
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_14
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 84
+        width: 86
+        height: 106
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_16
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 87
+        width: 86
+        height: 103
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_17
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 94
+        width: 86
+        height: 96
+      alignment: 7
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
