@@ -50,6 +50,7 @@ public class Ennemy : MonoBehaviour {
 			}
 			case Ennemy.EtypeEnnemy.eFleur:
 			{
+			//for(int i = 0 ; i < 
 				break;
 			}
 			case Ennemy.EtypeEnnemy.eNounours:
