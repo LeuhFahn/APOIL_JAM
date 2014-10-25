@@ -9,6 +9,7 @@ public class LaunchEnnemy : MonoBehaviour {
 	public float f_timerLaunch = 2.0f;
 	public float f_Velocity = 10.0f;
 	private float f_timer;
+	public float f_lifeTime = 5.0f;
 	private GameObject go_ennemy;
 
 	public struct TrajectoireFrame
@@ -34,6 +35,8 @@ public class LaunchEnnemy : MonoBehaviour {
 		SetTrajectoire();
 
 		CoroutineManager.Instance.StartCoroutine(launchEvents());
+
+		Destroy(this.gameObject, f_lifeTime);
 	}
 	
 	// Update is called once per frame

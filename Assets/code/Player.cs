@@ -21,12 +21,20 @@ public class Player : MonoBehaviour {
 	void Update () 
 	{
 		setPlayerInput();
-		float f_Velocity = 10.0f;
+		float f_Velocity = 2.0f;
 		Vector3 v3_move = Vector3.zero;
+		if(m_playerInput.moveRight)
+			v3_move += new Vector3(1, 0, 0);
+		if(m_playerInput.moveLeft)
+			v3_move += new Vector3(-1, 0, 0);
+		if(m_playerInput.moveUp)
+			v3_move += new Vector3(0, 1, 0);
+		if(m_playerInput.moveDown)
+			v3_move += new Vector3(0, -1, 0);
 
-		v3_move += f_Velocity * new Vector3(m_playerInput.DirectionHorizontal, m_playerInput.DirectionVertical, 0);
+		//v3_move += f_Velocity * new Vector3(m_playerInput.DirectionHorizontal, m_playerInput.DirectionVertical, 0);
 	
-		gameObject.transform.position += v3_move;
+		gameObject.transform.position += f_Velocity *  v3_move;
 		//rigidbody2D.AddForce(v3_move);
 	}
 
