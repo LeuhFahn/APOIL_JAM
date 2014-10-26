@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 	void Update () 
 	{
 		setPlayerInput();
-		float f_Velocity = 2.0f;
+		float f_Velocity = GlobalVariable.F_PLAYER_VELOCITY;
 		Vector3 v3_move = Vector3.zero;
 
 		bool b_moveLeft = m_playerInput.moveLeft;

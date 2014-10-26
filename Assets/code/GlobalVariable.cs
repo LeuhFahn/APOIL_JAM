@@ -74,6 +74,9 @@ public class GlobalVariable : MonoBehaviour {
 	
 	public static int N_NB_PETALE;
 	public int n_NbPetale = 8;
+
+	public static float F_PLAYER_VELOCITY;
+	public float f_playerVelocity = 2.0f;
 	
 	// Use this for initialization
 	void Awake () 
@@ -101,6 +104,7 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.F_NOUNOURS_VELOCITY = f_NounoursVelocity;
 		GlobalVariable.F_FLEUR_DISTANCE_EXPLOSION = f_fleurDistanceExplosion;
 		GlobalVariable.F_NUAGE_DISTANCE_EXPLOSION = f_NuageDistanceExplosion;
+		GlobalVariable.F_PLAYER_VELOCITY = f_playerVelocity;
 
 		GlobalVariable.N_NB_PETALE = n_NbPetale;
 	}

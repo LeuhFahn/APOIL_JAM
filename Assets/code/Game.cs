@@ -10,8 +10,10 @@ public class Game : MonoBehaviour {
 	public static float f_pointsDeLAmitie;
 	public static float f_difficulte;
 	public static float f_coinCpt;
-	public static float f_coinCptBuff;
+
 	public static GameObject[] tab_player = new GameObject[2];
+
+	bool b_coinInGame = false;
 
 	// Use this for initialization
 	void Start () 
@@ -49,7 +51,6 @@ public class Game : MonoBehaviour {
 		Game.f_difficulte = 0.0f;
 
 		Game.f_coinCpt = 0.0f;
-		Game.f_coinCptBuff = 0.0f;
 
 		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
 		//PaternManager.Instance.GenerateLauncherMap(PaternManager.ETypePatern.ePaternSchredder, 50.0f);
@@ -94,5 +95,10 @@ public class Game : MonoBehaviour {
 
 
 		Game.f_difficulte = Game.f_pointsDeLAmitie / Mathf.Max(fDistanceJ1J2, 200.0f);
+	}
+
+	void GenerateCoin()
+	{
+
 	}
 }
