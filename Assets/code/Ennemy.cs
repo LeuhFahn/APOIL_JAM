@@ -50,7 +50,18 @@ public class Ennemy : MonoBehaviour {
 			}
 			case Ennemy.EtypeEnnemy.eFleur:
 			{
-			//for(int i = 0 ; i < 
+				float f_angleRot = 0.0f;
+				float f_deltaAngle = 2.0f * Mathf.PI / (float)GlobalVariable.N_NB_PETALE;
+				for(int i = 0 ; i < GlobalVariable.N_NB_PETALE ; ++i)
+				{
+					GameObject go_petale = Object.Instantiate(GlobalVariable.PF_PETAL) as GameObject;
+					go_petale.transform.position = this.transform.position;
+					go_petale.name = "PF_ennemy_petal";
+					go_petale.transform.RotateAround(transform.forward, f_angleRot);
+					go_petale.transform.parent = this.transform;
+					f_angleRot += f_deltaAngle;
+				}
+				CoroutineManager.Instance.StartCoroutine(launchCoroutineFleur());
 				break;
 			}
 			case Ennemy.EtypeEnnemy.eNounours:
@@ -111,6 +122,7 @@ public class Ennemy : MonoBehaviour {
 			}
 			case Ennemy.EtypeEnnemy.ePetale:
 			{
+				
 				break;
 			}
 			case Ennemy.EtypeEnnemy.eSoleil:
@@ -137,9 +149,38 @@ public class Ennemy : MonoBehaviour {
 		transformRayonToArcEnCiel();
 	}
 
+	IEnumerator launchCoroutineFleur()
+	{
+		float f_timer = 0.0f;
+		
+		while(f_timer < GlobalVariable.F_TIME_TRANSFORMATION_FLEUR_PETALE)
+		{
+			foreach (Transform child in transform) 
+			{
+				if(child.gameObject.name == "PF_ennemy_petal")
+					child.localPosition = Vector3.zero;
+			}
+
+			f_timer += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		
+		transformFleurToPetal();
+	}
+
 	void transformRayonToArcEnCiel()
 	{
 		gameObject.transform.FindChild("bad").gameObject.SetActive(false);
 		gameObject.transform.FindChild("arc").gameObject.SetActive(true);
+	}
+
+	void transformFleurToPetal()
+	{
+		foreach (Transform child in transform) 
+		{
+			if(child.gameObject.name == "PF_ennemy_petal")
+				child.parent = Game.go_trashContainer.transform;
+		}
+		Destroy(this.gameObject);
 	}
 }

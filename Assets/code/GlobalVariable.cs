@@ -57,6 +57,12 @@ public class GlobalVariable : MonoBehaviour {
 	public static float F_TIME_TRANSFORMATION_RAYON_ARC;
 	public float f_timeTransformationRayonArc = 2.0f;
 
+	public static float F_TIME_TRANSFORMATION_FLEUR_PETALE;
+	public float f_timeTransformationFleurPetale = 2.0f;
+
+	public static int N_NB_PETALE;
+	public int n_NbPetale = 8;
+	
 	// Use this for initialization
 	void Awake () 
 	{
@@ -78,6 +84,8 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.PF_LAUNCHER_NUAGE = pf_Nuage;
 		GlobalVariable.F_DISTANCE_AMITIE = f_distanceAmitie;
 		GlobalVariable.F_TIME_TRANSFORMATION_RAYON_ARC = f_timeTransformationRayonArc;
+		GlobalVariable.F_TIME_TRANSFORMATION_FLEUR_PETALE = f_timeTransformationFleurPetale;
+		GlobalVariable.N_NB_PETALE = n_NbPetale;
 	}
 	
 	// Update is called once per frame
