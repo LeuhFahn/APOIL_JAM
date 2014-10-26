@@ -21,7 +21,7 @@ public class LaunchEnnemy : MonoBehaviour {
 	}
 	
 	public float[] variablesDeTrajectoire;
-	private List<TrajectoireFrame> list_trajectoire;
+	public List<TrajectoireFrame> list_trajectoire;
 	private int n_SizeTrajectoire;
 	
 	void Start () 

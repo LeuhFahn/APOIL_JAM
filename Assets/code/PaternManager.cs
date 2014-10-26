@@ -27,6 +27,7 @@ public class PaternManager : MonoBehaviour {
 		ePaternSchredder,
 		ePaternLaVague,
 		ePaternDazzEstUnCon,
+		eShotGun,
 	}
 
 	private ETypePatern m_ePatern;
@@ -63,10 +64,23 @@ public class PaternManager : MonoBehaviour {
 		}
 	}
 
+	float f_timer = 0.0f;
+	float f_Duration = 2.0f;
 	void Update()
 	{
-
+		if(f_timer < f_Duration)
+		{
+			f_timer += Time.deltaTime;
+		}
+		else
+		{
+			GenerateNewLauncherMap(TypePatern, f_Duration);
+			f_timer = 0.0f;
+			f_Duration = Random.Range(5.0f,10.0f);
+			TypePatern = (Random.Range(0.0f, 100.0f) > 25) ?  ETypePatern.eShotGun :  ETypePatern.ePaternSchredder;
+		}
 	}
+
 
 	public void GenerateNewLauncherMap(ETypePatern _eTypePatern, float _f_duration)
 	{
@@ -87,6 +101,13 @@ public class PaternManager : MonoBehaviour {
 				//GenerateLauncherMapDazzEstUnCon(_list_launcher, _f_duration);
 				break;
 			}
+			case ETypePatern.eShotGun:
+			{
+				//GenerateLauncherMapDazzEstUnCon(_list_launcher, _f_duration);
+				CoroutineManager.Instance.StartCoroutine(CoroutineMapShotGun(_f_duration));
+				break;
+			}
+
 		}
 	}
 
@@ -97,7 +118,12 @@ public class PaternManager : MonoBehaviour {
 		int nNbLauncherHorizontal = 16;
 		int nNbLauncherVerticall = 10;
 
-		float f_velocityShot = 50.0f;
+
+		float f_velocityShot = 0.25f + Mathf.Sqrt(Game.f_difficulte / n_nbPaternLaunched)/(21.21f /* 4*racine(50) */ );
+		f_velocityShot *= GlobalVariable.F_PLAYER_VELOCITY;
+		
+		f_velocityShot = Mathf.Min (f_velocityShot, GlobalVariable.F_PLAYER_VELOCITY /2.0f);
+		
 		float f_timerLaunch =  2*2*fSizeCase/f_velocityShot;
 
 		float f_durationPatern = _f_duration;
@@ -184,6 +210,66 @@ public class PaternManager : MonoBehaviour {
 		_go_launcher.transform.parent = Game.go_trashContainer.transform;
 	}
 
+	void GenerateLauncherMapShotGun(List<LaunchEnnemy> _list_launcher, float _f_duration, float _f_sizeCase, int _n_nbCanon)
+	{
+		float f_DeltaAngle = 2.0f * _f_sizeCase / Screen.height;
+		int n_nbCanon = _n_nbCanon;
+		
+		float f_velocityShot = 0.25f + Mathf.Sqrt(Game.f_difficulte / n_nbPaternLaunched)/(21.21f /* 4*racine(50) */ );
+		f_velocityShot *= GlobalVariable.F_PLAYER_VELOCITY;
+		
+		f_velocityShot = Mathf.Min (f_velocityShot, GlobalVariable.F_PLAYER_VELOCITY /2.0f);
+		
+		float f_timerLaunch =  2*2*_f_sizeCase/f_velocityShot;
+		
+		for(int i = 0 ; i < 2 ; ++i)
+		{
+			int nQuelCote = Random.Range(0,3);
+			float fPosX = 0.0f;
+			float fPosY = 0.0f;
+
+			if(nQuelCote == 0)
+			{
+				fPosX = Random.Range(0.0f, 960.0f);
+				fPosY = 0.0f;
+			}
+			else if(nQuelCote == 1)
+			{
+				fPosX = Random.Range(0.0f, 960.0f);
+				fPosY = Screen.height;
+			}
+			else if(nQuelCote == 2)
+			{
+				fPosX = 0.0f;
+				fPosY = Random.Range(0.0f, 600.0f);
+			}
+			else if(nQuelCote == 3)
+			{
+				fPosX = Screen.width;
+				fPosY = Random.Range(0.0f, 600.0f);
+			}
+
+			
+			Vector3 v3_forward = new Vector3(1,0,0);
+			Vector3 v3_right = new Vector3(0,1,0);
+
+			float fAngle = Vector3.Angle(v3_forward, Game.tab_player[i].transform.position - new Vector3(fPosX, fPosY, 1));
+			if(Vector3.Dot(v3_right,  Game.tab_player[i].transform.position - new Vector3(fPosX, fPosY, 1)) < 0)
+				fAngle *= -1;
+
+			fAngle -= 2.0f * f_DeltaAngle*Mathf.Rad2Deg;
+
+			for(int j = 0 ; j < n_nbCanon ; ++j)
+			{
+				GameObject go_launcher = Object.Instantiate(GlobalVariable.PF_LAUNCHER_COEUR) as GameObject;
+
+				setVariablesLauncher(go_launcher, 0.0f, fPosX, fPosY , fAngle, f_timerLaunch, f_velocityShot, _f_duration);
+				fAngle += f_DeltaAngle*Mathf.Rad2Deg;
+				_list_launcher.Add(go_launcher.GetComponent<LaunchEnnemy>());
+			}
+		}
+	}
+	
 	void GenerateLauncherMapLaVague(List<LaunchEnnemy> _list_launcher, float _f_duration)
 	{
 	}
@@ -224,12 +310,13 @@ public class PaternManager : MonoBehaviour {
 	{
 		List<LaunchEnnemy> list_launcher = new List<LaunchEnnemy>();
 		float f_time = 0.0f;
-		
+
+
 		GenerateLauncherMapLaVague(list_launcher, _f_duration);
 		
 		while(f_time < _f_duration)
 		{
-			f_time+=Time.deltaTime;
+			f_time += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
 		
@@ -245,7 +332,66 @@ public class PaternManager : MonoBehaviour {
 		
 		while(f_time < _f_duration)
 		{
-			f_time+=Time.deltaTime;
+			f_time += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		
+		list_launcher.Clear();
+	}
+
+	IEnumerator CoroutineMapShotGun(float _f_duration)
+	{
+		List<LaunchEnnemy> list_launcher = new List<LaunchEnnemy>();
+		float f_time = 0.0f;
+		float f_sizeCase = 30.0f;
+
+		float f_DeltaAngle = 2.0f * f_sizeCase / Screen.height;
+
+		int n_nbCanon = 1;
+		if(Game.f_difficulte > 20.0f)
+			n_nbCanon = 3;
+		if(Game.f_difficulte > 35.0f)
+			n_nbCanon = 5;
+		
+		GenerateLauncherMapShotGun(list_launcher, _f_duration, f_sizeCase, n_nbCanon);
+
+		float[] f_lastAngle = new float[2];
+		float[] f_newAngle = new float[2];
+		for(int i = 0 ; i < 2 ; ++i)
+		{
+			f_lastAngle[i] = list_launcher[i*n_nbCanon].variablesDeTrajectoire[3];
+			f_newAngle[i] = f_lastAngle[i];
+		}
+
+		while(f_time < _f_duration)
+		{
+			/*Vector3 v3_forward = new Vector3(1,0,0);
+			Vector3 v3_right = new Vector3(0,1,0);
+
+			for (int i = 0 ; i < 2 ; ++i)
+			{
+				f_lastAngle[i] = f_newAngle[i];
+
+				Vector3 v3_Direction = Game.tab_player[i].transform.position - list_launcher[i * n_nbCanon].transform.position;
+
+				f_newAngle[i] = Vector3.Angle(v3_forward, Game.tab_player[i].transform.position - list_launcher[i * n_nbCanon].transform.position);
+				if(Vector3.Dot(v3_right,  Game.tab_player[i].transform.position - list_launcher[i * n_nbCanon].transform.position) < 0)
+					f_newAngle[i] *= -1;
+				 
+
+				f_newAngle[i] -= 2.0f * f_DeltaAngle*Mathf.Rad2Deg;
+				
+				for(int j = 0 ; j < n_nbCanon ; ++j)
+				{
+					f_newAngle[i] += f_DeltaAngle*Mathf.Rad2Deg;
+
+					list_launcher[i*n_nbCanon + j].transform.RotateAround(transform.forward , (f_newAngle[i] - f_lastAngle[i]) * Mathf.Deg2Rad);
+				}
+
+			}*/
+
+
+			f_time += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
 		

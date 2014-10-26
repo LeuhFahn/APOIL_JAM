@@ -126,11 +126,8 @@ public class Ennemy : MonoBehaviour {
 					go_cible = Game.tab_player[1];
 				}
 
-
-				
-					
-				Vector3 v3_forward = /*new Vector3(1,0,0); */this.rigidbody2D.transform.up;
-				Vector3 v3_right = /*new Vector3(0,1,0); */this.rigidbody2D.transform.right;
+				Vector3 v3_forward = this.rigidbody2D.transform.up;
+				Vector3 v3_right = this.rigidbody2D.transform.right;
 
 				float f_angle = Vector3.Angle(v3_right, go_cible.transform.position - this.transform.position);
 
