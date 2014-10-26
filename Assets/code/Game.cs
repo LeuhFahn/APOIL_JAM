@@ -9,6 +9,8 @@ public class Game : MonoBehaviour {
 
 	public static float f_pointsDeLAmitie;
 	public static float f_difficulte;
+	public static float f_coinCpt;
+	public static float f_coinCptBuff;
 	public static GameObject[] tab_player = new GameObject[2];
 
 	// Use this for initialization
@@ -46,6 +48,9 @@ public class Game : MonoBehaviour {
 		Game.f_pointsDeLAmitie = 0.0f;
 		Game.f_difficulte = 0.0f;
 
+		Game.f_coinCpt = 0.0f;
+		Game.f_coinCptBuff = 0.0f;
+
 		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
 		//PaternManager.Instance.GenerateLauncherMap(PaternManager.ETypePatern.ePaternSchredder, 50.0f);
 	}
@@ -54,11 +59,17 @@ public class Game : MonoBehaviour {
 	void Update () 
 	{
 		CApoilInput.Process(Time.deltaTime);
+		CalcVariableDifficulteJeanPhe();
 
 		if(CApoilInput.Quit)
 		{
 			Application.Quit();
 		}
+	}
+
+	void OnGUI()
+	{
+		GUI.Label(new Rect(10,10,500,100), "difficulte : "+((int)Game.f_difficulte).ToString() + "coin cpt : "+((int)Game.f_coinCpt).ToString());
 	}
 
 	void InitCamera(GameObject _go_camera)
@@ -71,13 +82,16 @@ public class Game : MonoBehaviour {
 	{
 		float fDistanceJ1J2 = Vector3.Distance(tab_player[0].transform.position , tab_player[1].transform.position);
 		if(GlobalVariable.F_DISTANCE_AMITIE > fDistanceJ1J2)
-			Game.f_pointsDeLAmitie += GlobalVariable.F_DISTANCE_AMITIE - fDistanceJ1J2;
+		{
+			Game.f_pointsDeLAmitie += (GlobalVariable.F_DISTANCE_AMITIE - fDistanceJ1J2)* Time.deltaTime;
+			Game.f_coinCpt += (GlobalVariable.F_DISTANCE_AMITIE - fDistanceJ1J2)* Time.deltaTime;
+		}
 		else
-			Game.f_pointsDeLAmitie -= fDistanceJ1J2;
+			Game.f_pointsDeLAmitie -= fDistanceJ1J2 * Time.deltaTime;
 
-		Game.f_pointsDeLAmitie *= Time.deltaTime;
 		if(Game.f_pointsDeLAmitie < 0)
 			Game.f_pointsDeLAmitie = 0.0f;
+
 
 		Game.f_difficulte = Game.f_pointsDeLAmitie / Mathf.Max(fDistanceJ1J2, 200.0f);
 	}
