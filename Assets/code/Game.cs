@@ -12,7 +12,7 @@ public class Game : MonoBehaviour {
 	public static float f_coinCpt;
 
 	public static GameObject[] tab_player = new GameObject[2];
-
+	static GameObject go_menu;
 	bool b_coinInGame = false;
 
 	// Use this for initialization
@@ -51,6 +51,8 @@ public class Game : MonoBehaviour {
 		Game.f_difficulte = 50.0f;
 
 		Game.f_coinCpt = 0.0f;
+
+		Game.go_menu = GameObject.Find("_menu");
 
 		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
 		//PaternManager.Instance.GenerateNewLauncherMap(PaternManager.ETypePatern.eShotGun, 50.0f);
@@ -100,6 +102,12 @@ public class Game : MonoBehaviour {
 	void GenerateCoin()
 	{
 
+	}
+
+	public static void EndGame(Player playerWin)
+	{
+
+		Game.go_menu.GetComponent<Menu>().EndGame(playerWin.e_playNum);
 	}
 	
 }
