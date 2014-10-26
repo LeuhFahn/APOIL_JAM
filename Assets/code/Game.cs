@@ -69,7 +69,7 @@ public class Game : MonoBehaviour {
 
 	void CalcVariableDifficulteJeanPhe()
 	{
-		float fDistanceJ1J2 = 1.0f;
+		float fDistanceJ1J2 = Vector3.Distance(tab_player[0].transform.position , tab_player[1].transform.position);
 		if(GlobalVariable.F_DISTANCE_AMITIE > fDistanceJ1J2)
 			Game.f_pointsDeLAmitie += GlobalVariable.F_DISTANCE_AMITIE - fDistanceJ1J2;
 		else

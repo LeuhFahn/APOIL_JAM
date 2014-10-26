@@ -225,6 +225,6 @@ public class Ennemy : MonoBehaviour {
 			petale = this.transform.FindChild("PF_ennemy_petal");
 		}
 
-		Destroy(this.gameObject,1.0f);
+		Destroy(this.gameObject);
 	}
 }
