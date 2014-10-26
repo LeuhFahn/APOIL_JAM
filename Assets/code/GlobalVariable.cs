@@ -69,6 +69,9 @@ public class GlobalVariable : MonoBehaviour {
 	public static float F_NOUNOURS_ANGLE_PER_SEC;
 	private float f_NounoursAnglePerSec = Mathf.PI / 10.0f;
 
+	public static float F_NOUNOURS_VELOCITY;
+	public float f_NounoursVelocity = 100.0f;
+	
 	public static int N_NB_PETALE;
 	public int n_NbPetale = 8;
 	
@@ -95,6 +98,7 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.F_TIME_TRANSFORMATION_RAYON_ARC = f_timeTransformationRayonArc;
 		GlobalVariable.F_TIME_TRANSFORMATION_FLEUR_PETALE = f_timeTransformationFleurPetale;
 		GlobalVariable.F_NOUNOURS_ANGLE_PER_SEC = f_NounoursAnglePerSec;
+		GlobalVariable.F_NOUNOURS_VELOCITY = f_NounoursVelocity;
 		GlobalVariable.F_FLEUR_DISTANCE_EXPLOSION = f_fleurDistanceExplosion;
 		GlobalVariable.F_NUAGE_DISTANCE_EXPLOSION = f_NuageDistanceExplosion;
 

@@ -82,6 +82,7 @@ public class Ennemy : MonoBehaviour {
 			}
 			case Ennemy.EtypeEnnemy.eNuage:
 			{
+				CoroutineManager.Instance.StartCoroutine(launchCoroutineNuage());
 				break;
 			}
 			case Ennemy.EtypeEnnemy.ePetale:
@@ -134,11 +135,14 @@ public class Ennemy : MonoBehaviour {
 				float f_angle = Vector3.Angle(v3_right, go_cible.transform.position - this.transform.position);
 
 				f_angle *= Mathf.Deg2Rad;
-				//f_angle = Mathf.Min(f_angle , Mathf.Sign(f_angle) * GlobalVariable.F_NOUNOURS_ANGLE_PER_SEC * Time.deltaTime);
+				if(Vector3.Dot(v3_forward,  go_cible.transform.position - this.transform.position) < 0)
+					f_angle *= -1;
+				
+				f_angle = Mathf.Min(f_angle , Mathf.Sign(f_angle) * GlobalVariable.F_NOUNOURS_ANGLE_PER_SEC * Time.deltaTime);
 				Vector3 v3_newDirection = Mathf.Sin (f_angle) * v3_forward + Mathf.Cos(f_angle) * v3_right;
-				v3_newDirection *= 100;
-					Debug.DrawRay(this.rigidbody2D.transform.position, v3_newDirection);
-					//this.rigidbody2D.transform.RotateAround(transform.forward, Mathf.Min( f_angle * Mathf.Deg2Rad, Mathf.Sign(f_angle) * GlobalVariable.F_NOUNOURS_ANGLE_PER_SEC * Time.deltaTime));
+				v3_newDirection *= GlobalVariable.F_NOUNOURS_VELOCITY;
+				
+				this.rigidbody2D.transform.RotateAround(transform.forward, f_angle + 3.14159f/2.0f);
 					//rigidbody2D.transform.up = this.rigidbody2D.transform.position + v3_newDirection;//go_cible.transform.position - this.transform.position ;//AddForce(500.0f * (go_cible.transform.position - this.transform.position).normalized);
 				rigidbody2D.velocity = v3_newDirection;
 				break;
@@ -205,8 +209,22 @@ public class Ennemy : MonoBehaviour {
 
 			yield return new WaitForEndOfFrame();
 		}
-		
-		//transformFleurToPetal();
+	}
+
+	IEnumerator launchCoroutineNuage()
+	{
+		bool b_explosion = false;
+		while(!b_explosion)
+		{
+			float f_distancePlayer1 = Vector3.Distance(Game.tab_player[0].transform.position, this.transform.position);
+			float f_distancePlayer2 = Vector3.Distance(Game.tab_player[1].transform.position, this.transform.position);
+			if(f_distancePlayer1 <= GlobalVariable.F_NUAGE_DISTANCE_EXPLOSION || f_distancePlayer2 <= GlobalVariable.F_NUAGE_DISTANCE_EXPLOSION)
+			{
+				transformNuageToSoleil();
+				b_explosion = true;
+			}
+			yield return new WaitForEndOfFrame();
+		}
 	}
 
 	void transformRayonToArcEnCiel()
@@ -225,6 +243,13 @@ public class Ennemy : MonoBehaviour {
 			petale = this.transform.FindChild("PF_ennemy_petal");
 		}
 
+		Destroy(this.gameObject);
+	}
+
+	void transformNuageToSoleil()
+	{
+		GameObject go_sun = Object.Instantiate(GlobalVariable.PF_SOLEIL) as GameObject;
+		go_sun.transform.position = this.transform.position;
 		Destroy(this.gameObject);
 	}
 }

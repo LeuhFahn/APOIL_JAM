@@ -125,6 +125,10 @@ public class LaunchEnnemy : MonoBehaviour {
 				go_ennemy.rigidbody2D.transform.right = this.rigidbody2D.transform.up;
 				go_ennemy.rigidbody2D.velocity = Vector2.zero;
 			}
+			if(m_eTypeEnnemyToLaunch == Ennemy.ETypeLaunchElement.eNuage)
+			{
+				go_ennemy.rigidbody2D.velocity = f_Velocity * this.rigidbody2D.transform.up;
+			}
 			else 
 			{
 				go_ennemy.rigidbody2D.transform.up = this.rigidbody2D.transform.up;
