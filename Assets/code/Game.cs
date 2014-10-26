@@ -9,6 +9,7 @@ public class Game : MonoBehaviour {
 
 	public static float f_pointsDeLAmitie;
 	public static float f_difficulte;
+	public static GameObject[] tab_player = new GameObject[2];
 
 	// Use this for initialization
 	void Start () 
@@ -26,6 +27,7 @@ public class Game : MonoBehaviour {
 				go_player = Object.Instantiate(GlobalVariable.PF_PLAYER_MAN) as GameObject;
 				//go_spriteContainer.transform.parent = go_player.transform;
 				go_player.GetComponent<Player>().e_playNum = Player.EPlayerNum.ePlayer1;
+				tab_player[0] = go_player;
 			}
 			else
 			{
@@ -33,6 +35,7 @@ public class Game : MonoBehaviour {
 				//go_spriteContainer.transform.parent = go_player.transform;
 				go_player.GetComponent<Player>().e_playNum = Player.EPlayerNum.ePlayer2;
 				f_offset *= -1;
+				tab_player[1] = go_player;
 			}
 
 			go_player.rigidbody2D.transform.position = new Vector2(Screen.width / 4.0f + (1-i)*Screen.width / 2.0f, Screen.height / 2.0f);

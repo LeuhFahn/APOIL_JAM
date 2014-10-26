@@ -60,6 +60,15 @@ public class GlobalVariable : MonoBehaviour {
 	public static float F_TIME_TRANSFORMATION_FLEUR_PETALE;
 	public float f_timeTransformationFleurPetale = 2.0f;
 
+	public static float F_FLEUR_DISTANCE_EXPLOSION;
+	public float f_fleurDistanceExplosion = 500.0f;
+
+	public static float F_NUAGE_DISTANCE_EXPLOSION;
+	public float f_NuageDistanceExplosion = 500.0f;
+
+	public static float F_NOUNOURS_ANGLE_PER_SEC;
+	private float f_NounoursAnglePerSec = Mathf.PI / 10.0f;
+
 	public static int N_NB_PETALE;
 	public int n_NbPetale = 8;
 	
@@ -85,6 +94,10 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.F_DISTANCE_AMITIE = f_distanceAmitie;
 		GlobalVariable.F_TIME_TRANSFORMATION_RAYON_ARC = f_timeTransformationRayonArc;
 		GlobalVariable.F_TIME_TRANSFORMATION_FLEUR_PETALE = f_timeTransformationFleurPetale;
+		GlobalVariable.F_NOUNOURS_ANGLE_PER_SEC = f_NounoursAnglePerSec;
+		GlobalVariable.F_FLEUR_DISTANCE_EXPLOSION = f_fleurDistanceExplosion;
+		GlobalVariable.F_NUAGE_DISTANCE_EXPLOSION = f_NuageDistanceExplosion;
+
 		GlobalVariable.N_NB_PETALE = n_NbPetale;
 	}
 	
