@@ -30,7 +30,7 @@ public class Ennemy : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		GameObject.Destroy(this.gameObject, 20.0f);
+		GameObject.Destroy(this.gameObject, 30.0f);
 		InitEnnemyType();
 	}
 	

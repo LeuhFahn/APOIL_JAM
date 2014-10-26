@@ -53,7 +53,7 @@ public class Game : MonoBehaviour {
 		Game.f_coinCpt = 0.0f;
 
 		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
-		//PaternManager.Instance.GenerateLauncherMap(PaternManager.ETypePatern.ePaternSchredder, 50.0f);
+		PaternManager.Instance.GenerateNewLauncherMap(PaternManager.ETypePatern.ePaternSchredder, 50.0f);
 	}
 	
 	// Update is called once per frame

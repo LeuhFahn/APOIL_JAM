@@ -52,7 +52,7 @@ public class Player : MonoBehaviour {
 
 		//v3_move += f_Velocity * new Vector3(m_playerInput.DirectionHorizontal, m_playerInput.DirectionVertical, 0);
 	
-		gameObject.transform.position += f_Velocity *  v3_move;
+		gameObject.transform.position += f_Velocity *  v3_move * Time.deltaTime;
 		//rigidbody2D.AddForce(v3_move);
 	}
 
