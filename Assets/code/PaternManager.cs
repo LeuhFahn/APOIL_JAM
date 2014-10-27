@@ -258,12 +258,18 @@ public class PaternManager : MonoBehaviour {
 				fAngle *= -1;
 
 			fAngle -= 2.0f * f_DeltaAngle*Mathf.Rad2Deg;
-
+			float fAngleDeltaBuff = - 2.0f * f_DeltaAngle*Mathf.Rad2Deg
 			for(int j = 0 ; j < n_nbCanon ; ++j)
 			{
 				GameObject go_launcher = Object.Instantiate(GlobalVariable.PF_LAUNCHER_COEUR) as GameObject;
-
+				
 				setVariablesLauncher(go_launcher, 0.0f, fPosX, fPosY , fAngle, f_timerLaunch, f_velocityShot, _f_duration);
+			/*	
+			//	test
+				go_launcher.transform.LookAt(Game.tab_player[i].transform);
+				go_launcher.rotate(fAngleDeltaBuff)
+				fAngleDeltaBuff += f_DeltaAngle*Mathf.Rad2Deg;
+			*/	
 				fAngle += f_DeltaAngle*Mathf.Rad2Deg;
 				_list_launcher.Add(go_launcher.GetComponent<LaunchEnnemy>());
 			}
