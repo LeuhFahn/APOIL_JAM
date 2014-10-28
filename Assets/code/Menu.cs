@@ -10,6 +10,7 @@ public class Menu : MonoBehaviour
 	public GameObject menu_instruc;
 	public GameObject menu_perso1_win;
 	public GameObject menu_perso2_win;
+	public GameObject text_credit;
 
 	// Use this for initialization
 	void Awake () 
@@ -53,6 +54,7 @@ public class Menu : MonoBehaviour
 		menu_start.SetActive(false);
 		menu_credit.SetActive(true);
 		menu_instruc.SetActive(false);
+		text_credit.GetComponent<AnimMenuCredit>().ResetPosText();
 	}
 
 	public void quitter()
