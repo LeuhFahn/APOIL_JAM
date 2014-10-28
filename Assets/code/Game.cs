@@ -29,14 +29,12 @@ public class Game : MonoBehaviour {
 			if(i == 0)
 			{
 				go_player = Object.Instantiate(GlobalVariable.PF_PLAYER_MAN) as GameObject;
-				//go_spriteContainer.transform.parent = go_player.transform;
 				go_player.GetComponent<Player>().e_playNum = Player.EPlayerNum.ePlayer1;
 				tab_player[0] = go_player;
 			}
 			else
 			{
 				go_player = Object.Instantiate(GlobalVariable.PF_PLAYER_WOMAN) as GameObject;
-				//go_spriteContainer.transform.parent = go_player.transform;
 				go_player.GetComponent<Player>().e_playNum = Player.EPlayerNum.ePlayer2;
 				f_offset *= -1;
 				tab_player[1] = go_player;
@@ -48,7 +46,7 @@ public class Game : MonoBehaviour {
 		Game.go_trashContainer = GameObject.Find("_trashContainer");
 
 		Game.f_pointsDeLAmitie = 0.0f;
-		Game.f_difficulte = 50.0f;
+		Game.f_difficulte = 30.0f;
 
 		Game.f_coinCpt = 0.0f;
 
@@ -106,7 +104,6 @@ public class Game : MonoBehaviour {
 
 	public static void EndGame(Player playerWin)
 	{
-
 		Game.go_menu.GetComponent<Menu>().EndGame(playerWin.e_playNum);
 	}
 	

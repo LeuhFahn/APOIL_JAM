@@ -68,6 +68,11 @@ public class PaternManager : MonoBehaviour {
 	float f_Duration = 2.0f;
 	void Update()
 	{
+		UpdatePatern();
+	}
+
+	void UpdatePatern()
+	{
 		if(f_timer < f_Duration)
 		{
 			f_timer += Time.deltaTime;
@@ -249,28 +254,11 @@ public class PaternManager : MonoBehaviour {
 				fPosY = Random.Range(0.0f, 600.0f);
 			}
 
-			
-			Vector3 v3_forward = new Vector3(1,0,0);
-			Vector3 v3_right = new Vector3(0,1,0);
 
-			float fAngle = Vector3.Angle(v3_forward, Game.tab_player[i].transform.position - new Vector3(fPosX, fPosY, 1));
-			if(Vector3.Dot(v3_right,  Game.tab_player[i].transform.position - new Vector3(fPosX, fPosY, 1)) < 0)
-				fAngle *= -1;
-
-			fAngle -= 2.0f * f_DeltaAngle*Mathf.Rad2Deg;
-			//float fAngleDeltaBuff = - 2.0f * f_DeltaAngle*Mathf.Rad2Deg
 			for(int j = 0 ; j < n_nbCanon ; ++j)
 			{
 				GameObject go_launcher = Object.Instantiate(GlobalVariable.PF_LAUNCHER_COEUR) as GameObject;
-				
-				setVariablesLauncher(go_launcher, 0.0f, fPosX, fPosY , fAngle, f_timerLaunch, f_velocityShot, _f_duration);
-			/*	
-			//	test
-				go_launcher.transform.LookAt(Game.tab_player[i].transform);
-				go_launcher.rotate(fAngleDeltaBuff)
-				fAngleDeltaBuff += f_DeltaAngle*Mathf.Rad2Deg;
-			*/	
-				fAngle += f_DeltaAngle*Mathf.Rad2Deg;
+				setVariablesLauncher(go_launcher, 0.0f, fPosX, fPosY , 0.0f, f_timerLaunch, f_velocityShot, _f_duration);
 				_list_launcher.Add(go_launcher.GetComponent<LaunchEnnemy>());
 			}
 		}
@@ -361,41 +349,20 @@ public class PaternManager : MonoBehaviour {
 		
 		GenerateLauncherMapShotGun(list_launcher, _f_duration, f_sizeCase, n_nbCanon);
 
-		float[] f_lastAngle = new float[2];
-		float[] f_newAngle = new float[2];
-		for(int i = 0 ; i < 2 ; ++i)
-		{
-			f_lastAngle[i] = list_launcher[i*n_nbCanon].variablesDeTrajectoire[3];
-			f_newAngle[i] = f_lastAngle[i];
-		}
-
 		while(f_time < _f_duration)
 		{
-			/*Vector3 v3_forward = new Vector3(1,0,0);
-			Vector3 v3_right = new Vector3(0,1,0);
-
 			for (int i = 0 ; i < 2 ; ++i)
 			{
-				f_lastAngle[i] = f_newAngle[i];
-
 				Vector3 v3_Direction = Game.tab_player[i].transform.position - list_launcher[i * n_nbCanon].transform.position;
-
-				f_newAngle[i] = Vector3.Angle(v3_forward, Game.tab_player[i].transform.position - list_launcher[i * n_nbCanon].transform.position);
-				if(Vector3.Dot(v3_right,  Game.tab_player[i].transform.position - list_launcher[i * n_nbCanon].transform.position) < 0)
-					f_newAngle[i] *= -1;
-				 
-
-				f_newAngle[i] -= 2.0f * f_DeltaAngle*Mathf.Rad2Deg;
-				
+				int nDecal = (n_nbCanon - 1)/2;
+				float f_AngleDecal = -nDecal * f_DeltaAngle*Mathf.Rad2Deg;
 				for(int j = 0 ; j < n_nbCanon ; ++j)
 				{
-					f_newAngle[i] += f_DeltaAngle*Mathf.Rad2Deg;
-
-					list_launcher[i*n_nbCanon + j].transform.RotateAround(transform.forward , (f_newAngle[i] - f_lastAngle[i]) * Mathf.Deg2Rad);
+					list_launcher[i*n_nbCanon + j].transform.up = v3_Direction;
+					list_launcher[i*n_nbCanon + j].transform.RotateAround(-this.transform.forward, f_AngleDecal);
+					f_AngleDecal += f_DeltaAngle*Mathf.Rad2Deg;
 				}
-
-			}*/
-
+			}
 
 			f_time += Time.deltaTime;
 			yield return new WaitForEndOfFrame();

@@ -72,16 +72,19 @@ public class Menu : MonoBehaviour
 
 	public void rejouer()
 	{
+		Time.timeScale = 1.0f;
 		Application.LoadLevel(1);
 		menu_endGame.SetActive(false);
 		menu_start.SetActive(false);
 		menu_credit.SetActive(false);
 		menu_instruc.SetActive(false);
 		UI.SetActive(false);
+
 	}
 
 	public void EndGame(Player.EPlayerNum ePlayerNum)
 	{
+		Time.timeScale = 0.0f;
 		UI.SetActive(true);
 		menu_endGame.SetActive(true);
 		menu_start.SetActive(false);
@@ -97,5 +100,6 @@ public class Menu : MonoBehaviour
 			menu_perso1_win.SetActive(true);
 			menu_perso2_win.SetActive(false);
 		}
+
 	}
 }
