@@ -3,6 +3,9 @@ using System.Collections;
 
 public class GlobalVariable : MonoBehaviour {
 
+	public static GameObject PF_MENU;
+	public GameObject pf_Menu;
+
 	public static GameObject PF_CAMERA;
 	public GameObject pf_Camera;
 
@@ -81,6 +84,7 @@ public class GlobalVariable : MonoBehaviour {
 	// Use this for initialization
 	void Awake () 
 	{
+		GlobalVariable.PF_MENU = pf_Menu;
 		GlobalVariable.PF_CAMERA = pf_Camera;
 		GlobalVariable.PF_PLAYER_MAN = pf_PLayerMan;
 		GlobalVariable.PF_PLAYER_WOMAN = pf_PLayerWoman;

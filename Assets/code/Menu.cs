@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour
 	public GameObject menu_perso2_win;
 	public GameObject text_credit;
 
-		private static bool b_instantiated = false; // set true à l'init et remis à false en lançant le jeu
+	private static bool b_instantiated = false; // set true à l'init et remis à false en lançant le jeu
 	private static Menu _instance = null;
 	public static Menu Instance
 	{
@@ -34,12 +34,11 @@ public class Menu : MonoBehaviour
 	{
 		if(mgr == null)
 		{
-			GameObject go = Object.Instantiate(Game.PF_MENU) as GamseObject;
+			GameObject go = Object.Instantiate(GlobalVariable.PF_MENU) as GameObject;
 		}
 
 		b_instantiated = true;
 		DontDestroyOnLoad(mgr.gameObject);
-		DontDestroyOnLoad(mgr.UI);
 		_instance = mgr;
 		
 		mgr.menu_endGame.SetActive(false);
@@ -68,6 +67,7 @@ public class Menu : MonoBehaviour
 
 	public void commencer()
 	{
+		Time.timeScale = 1.0f;
 		Application.LoadLevel(1);
 		menu_endGame.SetActive(false);
 		menu_start.SetActive(false);
@@ -100,6 +100,8 @@ public class Menu : MonoBehaviour
 
 	public void goMenu()
 	{
+		Time.timeScale = 1.0f;
+		Application.LoadLevel(0);
 		menu_endGame.SetActive(false);
 		menu_start.SetActive(true);
 		menu_credit.SetActive(false);
