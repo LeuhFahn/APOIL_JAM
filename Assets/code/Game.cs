@@ -46,7 +46,7 @@ public class Game : MonoBehaviour {
 		Game.go_trashContainer = GameObject.Find("_trashContainer");
 
 		Game.f_pointsDeLAmitie = 0.0f;
-		Game.f_difficulte = 30.0f;
+		Game.f_difficulte = 0.0f;
 
 		Game.f_coinCpt = 0.0f;
 

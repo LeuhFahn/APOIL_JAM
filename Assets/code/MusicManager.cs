@@ -6,6 +6,11 @@ public class MusicManager : MonoBehaviour {
 	public AudioClip[] randomPhrases = new AudioClip[7] ;
 	public AudioSource sourceRandom;
 	public AudioSource[] fixPhrases = new AudioSource[4] ;
+
+	public AnimationCurve[] DazzCurves = new AnimationCurve[5] ;
+
+	float f_MaxEloignement;
+
 	// Use this for initialization
 	void Awake () 
 	{
@@ -15,6 +20,8 @@ public class MusicManager : MonoBehaviour {
 		{
 			audio.Play();
 		}
+
+		f_MaxEloignement = Mathf.Sqrt(Screen.width * Screen.width + Screen.height * Screen.height);
 	}
 	
 	// Update is called once per frame
@@ -26,14 +33,22 @@ public class MusicManager : MonoBehaviour {
 			sourceRandom.clip = randomPhrases[id];
 			sourceRandom.Play();
 		}
+
+		float f_distance = Vector2.Distance(new Vector2(Game.tab_player[0].transform.position.x, Game.tab_player[0].transform.position.y), 
+		                                    new Vector2(Game.tab_player[1].transform.position.x, Game.tab_player[1].transform.position.y));
+
+		float f_ratio = f_distance / f_MaxEloignement;
+		Debug.Log(1.0f - f_ratio);
+
+		SetRatioVolumeMusic(1.0f - f_ratio);
 	}
 
-	void SetVolumeMusic(float _f_volume)
+	void SetRatioVolumeMusic(float _f_ratio)
 	{
-		sourceRandom.volume = _f_volume;
+		sourceRandom.volume = _f_ratio;
 		foreach(AudioSource audio in fixPhrases)
 		{
-			audio.volume = _f_volume;
+			audio.volume = _f_ratio;
 		}
 	}
 }
