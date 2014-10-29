@@ -23,12 +23,14 @@ public class LaunchEnnemy : MonoBehaviour {
 	public float[] variablesDeTrajectoire;
 	public List<TrajectoireFrame> list_trajectoire;
 	private int n_SizeTrajectoire;
-	
+
 	void Start () 
 	{
 		f_timer = 0.0f;
 		n_SizeTrajectoire = variablesDeTrajectoire.Length/4;
 		list_trajectoire = new List<TrajectoireFrame>(n_SizeTrajectoire);
+
+		//variablesDeTrajectoire = new float[4];
 
 		SetTrajectoire();
 

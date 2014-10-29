@@ -52,8 +52,8 @@ public class Game : MonoBehaviour {
 
 		Game.go_menu = GameObject.Find("_menu");
 
-		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
-		//PaternManager.Instance.GenerateNewLauncherMap(PaternManager.ETypePatern.eShotGun, 50.0f);
+		//PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
+		PaternManager.Instance.GenerateNewLauncherMap(PaternManager.ETypePatern.eJenovasDream, 5.0f);
 	}
 	
 	// Update is called once per frame

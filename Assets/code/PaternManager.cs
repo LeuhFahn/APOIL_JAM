@@ -25,9 +25,10 @@ public class PaternManager : MonoBehaviour {
 	public enum ETypePatern
 	{
 		ePaternSchredder,
-		ePaternLaVague,
-		ePaternDazzEstUnCon,
+		//ePaternLaVague,
+		//ePaternDazzEstUnCon,
 		eShotGun,
+		eJenovasDream
 	}
 
 	private ETypePatern m_ePatern;
@@ -68,7 +69,7 @@ public class PaternManager : MonoBehaviour {
 	float f_Duration = 2.0f;
 	void Update()
 	{
-		UpdatePatern();
+		//UpdatePatern();
 	}
 
 	void UpdatePatern()
@@ -96,7 +97,7 @@ public class PaternManager : MonoBehaviour {
 				CoroutineManager.Instance.StartCoroutine(CoroutineMapPaternSchredder(_f_duration, true));
 			    break;
 			}
-			case ETypePatern.ePaternLaVague:
+			/*case ETypePatern.ePaternLaVague:
 			{
 				//GenerateLauncherMapLaVague(_list_launcher, _f_duration);
 				break;
@@ -105,13 +106,18 @@ public class PaternManager : MonoBehaviour {
 			{
 				//GenerateLauncherMapDazzEstUnCon(_list_launcher, _f_duration);
 				break;
-			}
+			}*/
 			case ETypePatern.eShotGun:
 			{
 				//GenerateLauncherMapDazzEstUnCon(_list_launcher, _f_duration);
 				CoroutineManager.Instance.StartCoroutine(CoroutineMapShotGun(_f_duration));
 				break;
 			}
+		case ETypePatern.eJenovasDream:
+		{
+			CoroutineManager.Instance.StartCoroutine(CoroutineMapJenovasDream(_f_duration));
+			break;
+		}
 
 		}
 	}
@@ -263,13 +269,49 @@ public class PaternManager : MonoBehaviour {
 			}
 		}
 	}
-	
-	void GenerateLauncherMapLaVague(List<LaunchEnnemy> _list_launcher, float _f_duration)
+
+	void GenerateLauncherMapPaternJenovasDream(List<LaunchEnnemy> _list_launcher, float _f_duration)
 	{
+		int nNbLauncherVetical = 4;
+		float fSizeCase = Screen.height / nNbLauncherVetical;
+
+
+		float f_velocityShot = 0.25f + Mathf.Sqrt(Game.f_difficulte / n_nbPaternLaunched)/(21.21f /* 4*racine(50) */ );
+		f_velocityShot *= GlobalVariable.F_PLAYER_VELOCITY;
+		
+		f_velocityShot = Mathf.Min (f_velocityShot, GlobalVariable.F_PLAYER_VELOCITY /2.0f);
+		
+		float f_timerLaunch =  _f_duration;
+		
+		float f_durationPatern = _f_duration;
+
+		// gauche
+		for(int i = 0 ; i < nNbLauncherVetical ; ++i)
+		{
+			GameObject go_launcherLeft = Object.Instantiate(GlobalVariable.PF_LAUNCHER_FLEUR) as GameObject;
+			GameObject go_launcherRight = Object.Instantiate(GlobalVariable.PF_LAUNCHER_FLEUR) as GameObject;
+			setVariablesLauncher(go_launcherLeft, 0.0f,0.0f,fSizeCase / 2.0f + i*fSizeCase, 0.0f, f_timerLaunch, f_velocityShot, f_durationPatern);
+			setVariablesLauncher(go_launcherRight, 0.0f,Screen.width,fSizeCase / 2.0f + i*fSizeCase, 0.0f, f_timerLaunch, -f_velocityShot, f_durationPatern);
+			_list_launcher.Add(go_launcherLeft.GetComponent<LaunchEnnemy>());
+			_list_launcher.Add(go_launcherRight.GetComponent<LaunchEnnemy>());
+		}
 	}
 
-	void GenerateLauncherMapDazzEstUnCon(List<LaunchEnnemy> _list_launcher, float _f_duration)
+	IEnumerator CoroutineMapPaternLaVague(float _f_duration, bool _b_diagonale_HautDroite_BasGauche)
 	{
+		List<LaunchEnnemy> list_launcher = new List<LaunchEnnemy>();
+		float f_time = 0.0f;
+		
+		
+		//GenerateLauncherMapLaVague(list_launcher, _f_duration);
+		
+		while(f_time < _f_duration)
+		{
+			f_time += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		
+		list_launcher.Clear();
 	}
 
 	IEnumerator CoroutineMapPaternSchredder(float _f_duration, bool _b_diagonale_HautDroite_BasGauche)
@@ -297,39 +339,6 @@ public class PaternManager : MonoBehaviour {
 			yield return new WaitForEndOfFrame();
 		}
 
-		list_launcher.Clear();
-	}
-
-	IEnumerator CoroutineMapPaternLaVague(float _f_duration, bool _b_diagonale_HautDroite_BasGauche)
-	{
-		List<LaunchEnnemy> list_launcher = new List<LaunchEnnemy>();
-		float f_time = 0.0f;
-
-
-		GenerateLauncherMapLaVague(list_launcher, _f_duration);
-		
-		while(f_time < _f_duration)
-		{
-			f_time += Time.deltaTime;
-			yield return new WaitForEndOfFrame();
-		}
-		
-		list_launcher.Clear();
-	}
-
-	IEnumerator CoroutineMapDazzEstUnCon(float _f_duration, bool _b_diagonale_HautDroite_BasGauche)
-	{
-		List<LaunchEnnemy> list_launcher = new List<LaunchEnnemy>();
-		float f_time = 0.0f;
-		
-		GenerateLauncherMapDazzEstUnCon(list_launcher, _f_duration);
-		
-		while(f_time < _f_duration)
-		{
-			f_time += Time.deltaTime;
-			yield return new WaitForEndOfFrame();
-		}
-		
 		list_launcher.Clear();
 	}
 
@@ -364,6 +373,22 @@ public class PaternManager : MonoBehaviour {
 				}
 			}
 
+			f_time += Time.deltaTime;
+			yield return new WaitForEndOfFrame();
+		}
+		
+		list_launcher.Clear();
+	}
+
+	IEnumerator CoroutineMapJenovasDream(float _f_duration)
+	{
+		List<LaunchEnnemy> list_launcher = new List<LaunchEnnemy>();
+		float f_time = 0.0f;
+		
+		GenerateLauncherMapPaternJenovasDream(list_launcher, _f_duration);
+		
+		while(f_time < _f_duration)
+		{
 			f_time += Time.deltaTime;
 			yield return new WaitForEndOfFrame();
 		}
