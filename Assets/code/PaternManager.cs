@@ -69,7 +69,7 @@ public class PaternManager : MonoBehaviour {
 	float f_Duration = 2.0f;
 	void Update()
 	{
-		//UpdatePatern();
+		UpdatePatern();
 	}
 
 	void UpdatePatern()
@@ -82,8 +82,24 @@ public class PaternManager : MonoBehaviour {
 		{
 			GenerateNewLauncherMap(TypePatern, f_Duration);
 			f_timer = 0.0f;
-			f_Duration = Random.Range(5.0f,10.0f);
-			TypePatern = (Random.Range(0.0f, 100.0f) > 25) ?  ETypePatern.eShotGun :  ETypePatern.ePaternSchredder;
+
+			float fRand = Random.Range(0.0f, 100.0f);
+
+			if(	fRand < 25.0f)
+			{
+				f_Duration = Random.Range(5.0f,10.0f);
+				TypePatern = ETypePatern.ePaternSchredder;
+			}
+			else if (fRand < 50.0f)
+			{
+				f_Duration = Random.Range(2.0f,7.0f);
+				TypePatern = ETypePatern.eJenovasDream;
+			}
+			else
+			{
+				f_Duration = Random.Range(5.0f,10.0f);
+				TypePatern = ETypePatern.eShotGun;
+			}
 		}
 	}
 
@@ -113,11 +129,11 @@ public class PaternManager : MonoBehaviour {
 				CoroutineManager.Instance.StartCoroutine(CoroutineMapShotGun(_f_duration));
 				break;
 			}
-		case ETypePatern.eJenovasDream:
-		{
-			CoroutineManager.Instance.StartCoroutine(CoroutineMapJenovasDream(_f_duration));
-			break;
-		}
+			case ETypePatern.eJenovasDream:
+			{
+				CoroutineManager.Instance.StartCoroutine(CoroutineMapJenovasDream(_f_duration));
+				break;
+			}
 
 		}
 	}

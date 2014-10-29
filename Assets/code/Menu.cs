@@ -10,6 +10,9 @@ public class Menu : MonoBehaviour
 	public GameObject menu_instruc;
 	public GameObject menu_perso1_win;
 	public GameObject menu_perso2_win;
+	public GameObject menu_persoInGame;
+	public GameObject menu_perso1_Score;
+	public GameObject menu_perso2_Score;
 	public GameObject text_credit;
 
 	private static bool b_instantiated = false; // set true à l'init et remis à false en lançant le jeu
@@ -45,6 +48,7 @@ public class Menu : MonoBehaviour
 		mgr.menu_start.SetActive(true);
 		mgr.menu_credit.SetActive(false);
 		mgr.menu_instruc.SetActive(false);
+		mgr.menu_persoInGame.SetActive(false);
 	}
 
 	void Awake()
@@ -73,7 +77,7 @@ public class Menu : MonoBehaviour
 		menu_start.SetActive(false);
 		menu_credit.SetActive(false);
 		menu_instruc.SetActive(false);
-		UI.SetActive(false);
+		menu_persoInGame.SetActive(true);
 	}
 
 	public void instruction()
@@ -82,6 +86,7 @@ public class Menu : MonoBehaviour
 		menu_start.SetActive(false);
 		menu_credit.SetActive(false);
 		menu_instruc.SetActive(true);
+		menu_persoInGame.SetActive(false);
 	}
 
 	public void credit()
@@ -90,6 +95,7 @@ public class Menu : MonoBehaviour
 		menu_start.SetActive(false);
 		menu_credit.SetActive(true);
 		menu_instruc.SetActive(false);
+		menu_persoInGame.SetActive(false);
 		text_credit.GetComponent<AnimMenuCredit>().ResetPosText();
 	}
 
@@ -106,6 +112,7 @@ public class Menu : MonoBehaviour
 		menu_start.SetActive(true);
 		menu_credit.SetActive(false);
 		menu_instruc.SetActive(false);
+		menu_persoInGame.SetActive(false);
 	}
 
 	public void rejouer()
@@ -116,18 +123,17 @@ public class Menu : MonoBehaviour
 		menu_start.SetActive(false);
 		menu_credit.SetActive(false);
 		menu_instruc.SetActive(false);
-		UI.SetActive(false);
-
+		menu_persoInGame.SetActive(true);
 	}
 
 	public void EndGame(Player.EPlayerNum ePlayerNum)
 	{
 		Time.timeScale = 0.0f;
-		UI.SetActive(true);
 		menu_endGame.SetActive(true);
 		menu_start.SetActive(false);
 		menu_credit.SetActive(false);
 		menu_instruc.SetActive(false);
+		menu_persoInGame.SetActive(true);
 		if(ePlayerNum == Player.EPlayerNum.ePlayer1)
 		{
 			menu_perso1_win.SetActive(false);
@@ -139,5 +145,11 @@ public class Menu : MonoBehaviour
 			menu_perso2_win.SetActive(false);
 		}
 
+	}
+
+	public void SetScorePlayers(int _f_p1, int _f_p2)
+	{
+		menu_perso1_Score.GetComponent<UILabel>().text = _f_p1.ToString();
+		menu_perso2_Score.GetComponent<UILabel>().text = _f_p2.ToString();
 	}
 }

@@ -14,6 +14,14 @@ public class Player : MonoBehaviour {
 
 	public GameObject go_head;
 	public GameObject go_body;
+
+	int n_NbCoin = 0;
+	public int NbCoin
+	{
+		get{return n_NbCoin;}
+		set{n_NbCoin = value;}
+	}
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -51,8 +59,10 @@ public class Player : MonoBehaviour {
 		}
 
 		//v3_move += f_Velocity * new Vector3(m_playerInput.DirectionHorizontal, m_playerInput.DirectionVertical, 0);
-	
-		gameObject.transform.position += f_Velocity *  v3_move * Time.deltaTime;
+		Vector3 posToMove = gameObject.transform.position + f_Velocity * v3_move * Time.deltaTime;
+		if(posToMove.x >= 0.0f && posToMove.y >= 0.0f && 
+		   posToMove.x <= Screen.width && posToMove.y <= Screen.height)
+		   	gameObject.transform.position = posToMove;
 		//rigidbody2D.AddForce(v3_move);
 	}
 
@@ -69,6 +79,13 @@ public class Player : MonoBehaviour {
 		if(other.tag == "bad")
 		{
 			Game.EndGame(this);
+		}
+
+		if(other.tag == "coin")
+		{
+			n_NbCoin++;
+			Destroy(other.gameObject);
+			Game.CoinIsCatch();
 		}
 	}
 }

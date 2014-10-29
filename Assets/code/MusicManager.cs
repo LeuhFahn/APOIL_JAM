@@ -38,7 +38,6 @@ public class MusicManager : MonoBehaviour {
 		                                    new Vector2(Game.tab_player[1].transform.position.x, Game.tab_player[1].transform.position.y));
 
 		float f_ratio = f_distance / f_MaxEloignement;
-		Debug.Log(1.0f - f_ratio);
 		SetRatioVolumeMusic(1.0f - f_ratio);
 	}
 

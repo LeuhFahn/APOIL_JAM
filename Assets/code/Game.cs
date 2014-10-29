@@ -13,7 +13,7 @@ public class Game : MonoBehaviour {
 
 	public static GameObject[] tab_player = new GameObject[2];
 	static GameObject go_menu;
-	bool b_coinInGame = false;
+	public static bool b_coinInGame = false;
 
 	// Use this for initialization
 	void Start () 
@@ -50,10 +50,10 @@ public class Game : MonoBehaviour {
 
 		Game.f_coinCpt = 0.0f;
 
-		Game.go_menu = GameObject.Find("_menu");
+		Game.go_menu = Menu.Instance.gameObject;
 
-		//PaternManager.Instance.TypePatern = PaternManager.ETypePatern.ePaternSchredder;
-		PaternManager.Instance.GenerateNewLauncherMap(PaternManager.ETypePatern.eJenovasDream, 5.0f);
+		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.eJenovasDream;
+		//PaternManager.Instance.GenerateNewLauncherMap(PaternManager.ETypePatern.eJenovasDream, 5.0f);
 	}
 	
 	// Update is called once per frame
@@ -62,10 +62,23 @@ public class Game : MonoBehaviour {
 		CApoilInput.Process(Time.deltaTime);
 		CalcVariableDifficulteJeanPhe();
 
-		if(CApoilInput.Quit)
+		Menu.Instance.SetScorePlayers(tab_player[1].GetComponent<Player>().NbCoin, tab_player[0].GetComponent<Player>().NbCoin);
+
+		if(Game.f_coinCpt >= 500.0f && !Game.b_coinInGame)
+		{
+			GenerateCoin();
+			Game.f_coinCpt = 0.0f;
+		}
+
+		if(tab_player[1].GetComponent<Player>().NbCoin >= 3 + tab_player[0].GetComponent<Player>().NbCoin)
+			Menu.Instance.EndGame (Player.EPlayerNum.ePlayer1);
+		if(tab_player[0].GetComponent<Player>().NbCoin >= 3 + tab_player[1].GetComponent<Player>().NbCoin)
+			Menu.Instance.EndGame (Player.EPlayerNum.ePlayer2);
+
+		/*if(CApoilInput.Quit)
 		{
 			Application.Quit();
-		}
+		}*/
 	}
 
 	void OnGUI()
@@ -85,7 +98,8 @@ public class Game : MonoBehaviour {
 		if(GlobalVariable.F_DISTANCE_AMITIE > fDistanceJ1J2)
 		{
 			Game.f_pointsDeLAmitie += (GlobalVariable.F_DISTANCE_AMITIE - fDistanceJ1J2)* Time.deltaTime;
-			Game.f_coinCpt += (GlobalVariable.F_DISTANCE_AMITIE - fDistanceJ1J2)* Time.deltaTime;
+			if(!Game.b_coinInGame)
+				Game.f_coinCpt += (GlobalVariable.F_DISTANCE_AMITIE - fDistanceJ1J2)* Time.deltaTime;
 		}
 		else
 			Game.f_pointsDeLAmitie -= fDistanceJ1J2 * Time.deltaTime;
@@ -99,12 +113,25 @@ public class Game : MonoBehaviour {
 
 	void GenerateCoin()
 	{
+		Game.b_coinInGame = true;
+		GameObject go_coin = Object.Instantiate(GlobalVariable.PF_COIN) as GameObject;
+		Vector3 pos = Vector3.zero;
 
+		int deltaPos = 10;
+
+		pos.x = Random.Range(deltaPos ,Screen.width - deltaPos);
+		pos.y = Random.Range(deltaPos ,Screen.height - deltaPos);
+		go_coin.transform.position = pos;
 	}
 
 	public static void EndGame(Player playerWin)
 	{
-		Game.go_menu.GetComponent<Menu>().EndGame(playerWin.e_playNum);
+		Menu.Instance.EndGame(playerWin.e_playNum);
+	}
+
+	public static void CoinIsCatch()
+	{
+		Game.b_coinInGame = false;
 	}
 	
 }

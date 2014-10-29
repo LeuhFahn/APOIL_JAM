@@ -54,6 +54,9 @@ public class GlobalVariable : MonoBehaviour {
 	public static GameObject PF_LAUNCHER_NUAGE;
 	public GameObject pf_launcher_Nuage;
 
+	public static GameObject PF_COIN;
+	public GameObject pf_Coin;
+
 	public static float F_DISTANCE_AMITIE;
 	public float f_distanceAmitie = 500.0f;
 
@@ -101,6 +104,7 @@ public class GlobalVariable : MonoBehaviour {
 		GlobalVariable.PF_LAUNCHER_NOUNOURS = pf_launcher_Nounours;
 		GlobalVariable.PF_LAUNCHER_RAYON = pf_launcher_Rayon;
 		GlobalVariable.PF_LAUNCHER_NUAGE = pf_Nuage;
+		GlobalVariable.PF_COIN = pf_Coin;
 		GlobalVariable.F_DISTANCE_AMITIE = f_distanceAmitie;
 		GlobalVariable.F_TIME_TRANSFORMATION_RAYON_ARC = f_timeTransformationRayonArc;
 		GlobalVariable.F_TIME_TRANSFORMATION_FLEUR_PETALE = f_timeTransformationFleurPetale;
