@@ -12,18 +12,54 @@ public class Menu : MonoBehaviour
 	public GameObject menu_perso2_win;
 	public GameObject text_credit;
 
-	// Use this for initialization
-	void Awake () 
+		private static bool b_instantiated = false; // set true à l'init et remis à false en lançant le jeu
+	private static Menu _instance = null;
+	public static Menu Instance
 	{
-		menu_endGame.SetActive(false);
-		menu_start.SetActive(true);
-		menu_credit.SetActive(false);
-		menu_instruc.SetActive(false);
+		get
+		{
+			if(_instance == null)
+			{
+				if(!b_instantiated) // pour empecher des instances de se creer apres la fin de la partie
+				{
+					Init (GameObject.FindObjectOfType(typeof(Menu)) as Menu);
+				}
+			}
 
-		DontDestroyOnLoad(this.gameObject);
-		DontDestroyOnLoad(UI);
+			return _instance;
+		}
 	}
-	
+
+	static void Init(Menu mgr)
+	{
+		if(mgr == null)
+		{
+			GameObject go = Object.Instantiate(Game.PF_MENU) as GamseObject;
+		}
+
+		b_instantiated = true;
+		DontDestroyOnLoad(mgr.gameObject);
+		DontDestroyOnLoad(mgr.UI);
+		_instance = mgr;
+		
+		mgr.menu_endGame.SetActive(false);
+		mgr.menu_start.SetActive(true);
+		mgr.menu_credit.SetActive(false);
+		mgr.menu_instruc.SetActive(false);
+	}
+
+	void Awake()
+	{
+		if(_instance == null)
+		{
+			Init (this);
+		}
+		else if( _instance != this)
+		{
+			DestroyImmediate(this.gameObject);
+		}
+	}
+
 	// Update is called once per frame
 	void Update () 
 	{
