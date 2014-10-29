@@ -39,16 +39,17 @@ public class MusicManager : MonoBehaviour {
 
 		float f_ratio = f_distance / f_MaxEloignement;
 		Debug.Log(1.0f - f_ratio);
-
 		SetRatioVolumeMusic(1.0f - f_ratio);
 	}
 
 	void SetRatioVolumeMusic(float _f_ratio)
 	{
-		sourceRandom.volume = _f_ratio;
+		sourceRandom.volume = DazzCurves[0].Evaluate(_f_ratio);
+		int id = 1;
 		foreach(AudioSource audio in fixPhrases)
 		{
-			audio.volume = _f_ratio;
+			audio.volume = DazzCurves[id].Evaluate(_f_ratio);
+			++id;
 		}
 	}
 }
