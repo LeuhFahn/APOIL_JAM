@@ -49,7 +49,7 @@ public class Game : MonoBehaviour {
 		Game.f_difficulte = 0.0f;
 
 		Game.f_coinCpt = 0.0f;
-
+		Game.b_coinInGame = false;
 		Game.go_menu = Menu.Instance.gameObject;
 
 		PaternManager.Instance.TypePatern = PaternManager.ETypePatern.eJenovasDream;
