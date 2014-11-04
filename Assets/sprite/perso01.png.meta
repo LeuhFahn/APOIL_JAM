@@ -1,19 +1,15 @@
 fileFormatVersion: 2
-guid: e1259a72c3d5b62458a401f37fbfcc32
+guid: 9ea1210b73be9b146a916bf556c27d12
 TextureImporter:
   fileIDToRecycleName:
     21300000: perso01_0
-    21300002: perso01_2
-    21300004: perso01_4
-    21300006: perso01_6
-    21300008: perso01_8
-    21300010: perso01_9
-    21300012: perso01_10
-    21300014: perso01_12
-    21300016: perso01_13
-    21300018: perso01_14
-    21300020: perso01_16
-    21300022: perso01_17
+    21300002: perso01_1
+    21300004: perso01_2
+    21300006: perso01_3
+    21300008: perso01_4
+    21300010: perso01_5
+    21300012: perso01_6
+    21300014: perso01_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -29,14 +25,14 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: .25
     normalMapFilter: 0
-  isReadable: 1
+  isReadable: 0
   grayScaleToAlpha: 0
   generateCubemap: 0
   seamlessCubemap: 0
-  textureFormat: 5
+  textureFormat: -1
   maxTextureSize: 1024
   textureSettings:
-    filterMode: 0
+    filterMode: -1
     aniso: 1
     mipBias: -1
     wrapMode: 1
@@ -50,7 +46,7 @@ TextureImporter:
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
@@ -58,122 +54,82 @@ TextureImporter:
     - name: perso01_0
       rect:
         serializedVersion: 2
-        x: 302
-        y: 432
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        x: 153
+        y: 740
+        width: 236
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_1
+      rect:
+        serializedVersion: 2
+        x: 438
+        y: 728
+        width: 154
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: perso01_2
       rect:
         serializedVersion: 2
-        x: 190
-        y: 432
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        x: 661
+        y: 740
+        width: 161
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_3
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 740
+        width: 178
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: perso01_4
       rect:
         serializedVersion: 2
-        x: 59
-        y: 434
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        x: 1462
+        y: 580
+        width: 262
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: perso01_5
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 76
+        width: 263
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: perso01_6
       rect:
         serializedVersion: 2
-        x: 417
-        y: 434
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        x: 893
+        y: 95
+        width: 265
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_8
+    - name: perso01_7
       rect:
         serializedVersion: 2
-        x: 534
-        y: 433
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_9
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 291
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_10
-      rect:
-        serializedVersion: 2
-        x: 188
-        y: 292
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_12
-      rect:
-        serializedVersion: 2
-        x: 309
-        y: 291
-        width: 60
-        height: 60
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_13
-      rect:
-        serializedVersion: 2
-        x: 46
-        y: 94
-        width: 86
-        height: 96
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_14
-      rect:
-        serializedVersion: 2
-        x: 232
-        y: 84
-        width: 86
-        height: 106
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_16
-      rect:
-        serializedVersion: 2
-        x: 443
-        y: 87
-        width: 86
-        height: 103
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: perso01_17
-      rect:
-        serializedVersion: 2
-        x: 623
-        y: 94
-        width: 86
-        height: 96
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        x: 1469
+        y: 95
+        width: 262
+        height: 295
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
