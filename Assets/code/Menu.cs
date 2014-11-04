@@ -45,7 +45,9 @@ public class Menu : MonoBehaviour
 		_instance = mgr;
 		
 		mgr.menu_endGame.SetActive(false);
+#if !UNITY_EDITOR
 		mgr.menu_start.SetActive(true);
+#endif
 		mgr.menu_credit.SetActive(false);
 		mgr.menu_instruc.SetActive(false);
 		mgr.menu_persoInGame.SetActive(false);
