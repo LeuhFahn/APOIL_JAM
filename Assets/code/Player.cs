@@ -78,7 +78,7 @@ public class Player : MonoBehaviour {
 	{
 		if(other.tag == "bad")
 		{
-			Game.EndGame(this);
+			//Game.EndGame(this);
 		}
 
 		if(other.tag == "coin")
